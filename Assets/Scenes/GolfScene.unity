@@ -1046,7 +1046,7 @@ MonoBehaviour:
   m_TimeToAutoDeselect: 3
   m_EnableUIInteraction: 1
   m_BlockUIOnInteractableSelection: 1
-  m_AllowAnchorControl: 1
+  m_AllowAnchorControl: 0
   m_UseForceGrab: 1
   m_RotateSpeed: 180
   m_TranslateSpeed: 1
@@ -2312,7 +2312,7 @@ MonoBehaviour:
   m_TimeToAutoDeselect: 3
   m_EnableUIInteraction: 1
   m_BlockUIOnInteractableSelection: 1
-  m_AllowAnchorControl: 1
+  m_AllowAnchorControl: 0
   m_UseForceGrab: 1
   m_RotateSpeed: 180
   m_TranslateSpeed: 1
@@ -2599,7 +2599,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_SelectActionTrigger: 1
-  m_HideControllerOnSelect: 0
+  m_HideControllerOnSelect: 1
   m_AllowHoveredActivate: 0
   m_TargetPriorityMode: 0
   m_PlayAudioClipOnSelectEntered: 0
@@ -2799,7 +2799,7 @@ GameObject:
   - component: {fileID: 1104867794}
   - component: {fileID: 1104867795}
   m_Layer: 3
-  m_Name: DomRightHand
+  m_Name: GrabbingRightHand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2831,10 +2831,41 @@ MonoBehaviour:
   m_GameObject: {fileID: 1104867793}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aec45b3008b5e0f4583c7f0313e8bd07, type: 3}
+  m_Script: {fileID: 11500000, guid: dcba51309c0ed594396630428f1a5cd6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   whichHandAmI: 1
+--- !u!1 &1108890936
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1108890937}
+  m_Layer: 0
+  m_Name: GrabPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1108890937
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1108890936}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: -0.47, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1209484797}
+  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
 --- !u!1 &1168801112 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -1814469608084511900, guid: ae1af814635611742b7faf635e54a1df, type: 3}
@@ -3023,7 +3054,7 @@ GameObject:
   - component: {fileID: 1209484793}
   - component: {fileID: 1209484792}
   m_Layer: 0
-  m_Name: Cube
+  m_Name: (PLACEHOLDER PUTTER)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3131,7 +3162,7 @@ MonoBehaviour:
   m_OnDeactivate:
     m_PersistentCalls:
       m_Calls: []
-  m_AttachTransform: {fileID: 0}
+  m_AttachTransform: {fileID: 1108890937}
   m_SecondaryAttachTransform: {fileID: 0}
   m_UseDynamicAttach: 0
   m_MatchAttachPosition: 1
@@ -3288,10 +3319,11 @@ Transform:
   m_GameObject: {fileID: 1209484791}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 26.765, y: 0.994, z: 7.775}
-  m_LocalScale: {x: 0.17438, y: 0.42518285, z: 0.11944}
+  m_LocalPosition: {x: 26.765, y: 1.287, z: 7.775}
+  m_LocalScale: {x: 0.044325653, y: 1.0293252, z: 0.029961523}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1108890937}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1216635332
@@ -3661,7 +3693,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_SelectActionTrigger: 1
-  m_HideControllerOnSelect: 0
+  m_HideControllerOnSelect: 1
   m_AllowHoveredActivate: 0
   m_TargetPriorityMode: 0
   m_PlayAudioClipOnSelectEntered: 0
@@ -5236,6 +5268,7 @@ GameObject:
   - component: {fileID: 1686594018}
   - component: {fileID: 1686594020}
   - component: {fileID: 1686594019}
+  - component: {fileID: 1686594021}
   m_Layer: 3
   m_Name: rightHand
   m_TagString: Untagged
@@ -5308,6 +5341,19 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1686594017}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1686594021
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1686594017}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aec45b3008b5e0f4583c7f0313e8bd07, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  whichHandAmI: 1
 --- !u!1001 &1687198363
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6132,6 +6178,7 @@ GameObject:
   - component: {fileID: 1867437058}
   - component: {fileID: 1867437060}
   - component: {fileID: 1867437059}
+  - component: {fileID: 1867437061}
   m_Layer: 3
   m_Name: leftHand
   m_TagString: Untagged
@@ -6204,6 +6251,19 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1867437057}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1867437061
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1867437057}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aec45b3008b5e0f4583c7f0313e8bd07, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  whichHandAmI: 0
 --- !u!1 &1883332814
 GameObject:
   m_ObjectHideFlags: 0
@@ -6640,7 +6700,7 @@ GameObject:
   - component: {fileID: 2039276609}
   - component: {fileID: 2039276610}
   m_Layer: 3
-  m_Name: DomLeftHand
+  m_Name: GrabbingLeftHand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6672,7 +6732,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2039276608}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aec45b3008b5e0f4583c7f0313e8bd07, type: 3}
+  m_Script: {fileID: 11500000, guid: dcba51309c0ed594396630428f1a5cd6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   whichHandAmI: 0

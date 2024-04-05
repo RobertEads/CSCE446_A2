@@ -6,7 +6,7 @@ using UnityEngine.XR;
 
 
 
-public class handDomianceManagment : MonoBehaviour
+public class HandTeleportManagement : MonoBehaviour
 {
     private InputData controllerInput;
 
