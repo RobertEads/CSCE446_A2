@@ -22,9 +22,10 @@ public class CameraLookDirectionTracking : MonoBehaviour
     {
         if (Physics.Raycast(transform.position, transform.forward, out var hit, Mathf.Infinity, mask))
         {
-            var obj = hit.collider.gameObject;
+            //var obj = hit.collider.gameObject;
+            var tpPoint = hit.collider.gameObject.transform.parent.GetChild(2);
             myLogisticsManager.set_userLookingToTeleport(true);
-            myLogisticsManager.set_teleportTargetLocation(obj.transform.position);
+            myLogisticsManager.set_teleportTargetLocation(tpPoint.transform.position);
         }
         else { myLogisticsManager.set_userLookingToTeleport(false); }
     }

@@ -33,7 +33,6 @@ public class HandTeleportManagement : MonoBehaviour
             {
                 if (controllerInput.leftController.TryGetFeatureValue(CommonUsages.primaryButton, out bool isLeftPrimary))
                 {
-                    Debug.Log("left button pressed");
                     handle_teleport_request(isLeftPrimary);
                 }
             }
@@ -41,7 +40,6 @@ public class HandTeleportManagement : MonoBehaviour
             {
                 if (controllerInput.rightController.TryGetFeatureValue(CommonUsages.primaryButton, out bool isRightPrimary))
                 {
-                    Debug.Log("right button pressed");
                     handle_teleport_request(isRightPrimary);
                 }
             }
@@ -52,7 +50,6 @@ public class HandTeleportManagement : MonoBehaviour
     {
         if (isPrimary && myLogisticsManager.get_userLookingToTeleport())
         {
-            Debug.Log("Booking to TP");
             myLogisticsManager.set_userLookingToTeleport(false);
             myXrOrigin.transform.position = myLogisticsManager.get_teleportTargetLocation();
 
