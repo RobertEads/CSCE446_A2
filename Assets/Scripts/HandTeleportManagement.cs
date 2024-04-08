@@ -1,20 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.XR;
 
 
 
 public class HandTeleportManagement : MonoBehaviour
 {
-    private bool leftPrimaryUsed;
-    private bool rightPrimaryUsed;
+    private bool leftPrimaryUsed, rightPrimaryUsed, leftSecondaryUsed, rightSecondaryUsed;
 
     private InputData controllerInput;
     private LogisticsManagementScript myLogisticsManager;
     private GameObject myXrOrigin;
 
     [SerializeField] private hand whichHandAmI;
+    [SerializeField] private LayerMask mask;
 
 
     void Start()
@@ -26,7 +27,10 @@ public class HandTeleportManagement : MonoBehaviour
         controllerInput = myXrOrigin.GetComponent<InputData>();
 
         leftPrimaryUsed = false;
-        rightPrimaryUsed = false;
+        rightPrimaryUsed = false; 
+        leftSecondaryUsed = false;
+        rightSecondaryUsed = false;
+
     }
 
     void Update()
@@ -44,7 +48,20 @@ public class HandTeleportManagement : MonoBehaviour
                         leftPrimaryUsed = false;
                     }
                 }
+                if (controllerInput.leftController.TryGetFeatureValue(CommonUsages.secondaryButton, out bool isLeftSecondary) && !leftSecondaryUsed) 
+                { 
+                    if(isLeftSecondary)
+                    {
+                        leftSecondaryUsed = true;
+                        myLogisticsManager.set_inHalfTime(!myLogisticsManager.get_inHalfTime());
+                        leftSecondaryUsed = false;
+                    }
+                }
+                
+                if (Physics.Raycast(transform.position, transform.forward, out var hit, Mathf.Infinity, mask)) { myLogisticsManager.set_ballHitForReset(true); }
+                else { myLogisticsManager.set_ballHitForReset(false); }
             }
+
             else
             {
                 if (controllerInput.rightController.TryGetFeatureValue(CommonUsages.primaryButton, out bool isRightPrimary) && !rightPrimaryUsed)
@@ -57,6 +74,18 @@ public class HandTeleportManagement : MonoBehaviour
                     }
                     
                 }
+                if (controllerInput.rightController.TryGetFeatureValue(CommonUsages.secondaryButton, out bool isLeftSecondary) && !rightSecondaryUsed)
+                {
+                    if (isLeftSecondary)
+                    {
+                        rightSecondaryUsed = true;
+                        myLogisticsManager.set_inHalfTime(!myLogisticsManager.get_inHalfTime());
+                        rightSecondaryUsed = false;
+                    }
+                }
+                
+                if (Physics.Raycast(transform.position, transform.forward, out var hit, Mathf.Infinity, mask)) { myLogisticsManager.set_ballHitForReset(true); }
+                else { myLogisticsManager.set_ballHitForReset(false); }
             }
         }
     }

@@ -10,10 +10,10 @@ public class PutterBehavior : MonoBehaviour
     private Quaternion myStartingRotation;
     private Rigidbody myRigidbody;
     private LogisticsManagementScript logisticsManagementScript;
-    private GameObject ballSpawnPoint;
 
     [SerializeField] private whichHole myHole;
     [SerializeField] private GameObject ballPrefab;
+    [SerializeField] private GameObject ballSpawnPoint;
 
     // Start is called before the first frame update
     void Start()
@@ -23,7 +23,6 @@ public class PutterBehavior : MonoBehaviour
         myStartingRotation = transform.rotation;
         GameObject gameManager = GameObject.Find("LogisticManager");
         logisticsManagementScript = gameManager.GetComponent<LogisticsManagementScript>();
-        ballSpawnPoint = GameObject.Find("ballSpawn_holeOne");
     }
 
     private void OnTriggerEnter(Collider other)
@@ -46,7 +45,7 @@ public class PutterBehavior : MonoBehaviour
 
     private void OnCollisionExit(Collision collision)
     {
-        if (collision.collider.gameObject.layer == LayerMask.NameToLayer("Ball")) { logisticsManagementScript.increase_score(myHole); Debug.Log("Hit registered"); }
+        if (collision.collider.gameObject.layer == LayerMask.NameToLayer("Ball")) { logisticsManagementScript.increase_score(myHole); }
     }
 
 

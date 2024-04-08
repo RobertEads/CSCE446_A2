@@ -11,6 +11,8 @@ public class LogisticsManagementScript : MonoBehaviour
     private bool finishedWithGame = false;
     private bool userLookingToTeleport = false;
     private bool makeGameFinishedNetworkCall = false;
+    private bool inHalfTime = false;
+    private bool ballHitForReset = false;
 
     private Vector3 teleportTargetLocation;
     private whichHole currentHole;
@@ -29,11 +31,6 @@ public class LogisticsManagementScript : MonoBehaviour
         holeCompleted = new Dictionary<whichHole, bool>() { { whichHole.HOLE_1, false }, { whichHole.HOLE_2, false }, { whichHole.HOLE_3, false } };
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
 
 
 
@@ -58,6 +55,16 @@ public class LogisticsManagementScript : MonoBehaviour
 
     public bool finished_with_hole(whichHole selectedHole) { return holeCompleted[selectedHole]; }
 
+    public void i_won() {/* UI Stuff Here */ }
+
+    public void someone_else_won() {/* UI Stuff Here */ }
+
+    public void restart_ball_position() 
+    {
+        if (currentHole == whichHole.HOLE_1) { currentBallReference.transform.position = GameObject.Find("ballSpawn_holeOne").transform.position; }
+        if (currentHole == whichHole.HOLE_2) { currentBallReference.transform.position = GameObject.Find("ballSpawn_holeTwo").transform.position; }
+        if (currentHole == whichHole.HOLE_3) { currentBallReference.transform.position = GameObject.Find("ballSpawn_holeThree").transform.position; }
+    }
 
 
 
@@ -73,6 +80,9 @@ public class LogisticsManagementScript : MonoBehaviour
     public void set_teleportTargetLocation(Vector3 newValue) { teleportTargetLocation = newValue; }
     public void set_targetHole(whichHole newValue) { targetHole = newValue; }
     public void set_currentBallReference(GameObject newValue) { currentBallReference = newValue; }
+    public void set_inHalfTime(bool newValue) { inHalfTime = newValue; }
+
+    public void set_ballHitForReset(bool newValue) { ballHitForReset = newValue; }
 
 
     //Getters
@@ -87,4 +97,6 @@ public class LogisticsManagementScript : MonoBehaviour
     public GameObject get_currentBallReference() {  return currentBallReference; }
     public int get_myTotalScore() { return myTotalScore; }
     public int get_score_for_specific_hole(whichHole selectedHole) { return myScores[selectedHole]; }
+    public bool get_inHalfTime() { return inHalfTime; }
+    public bool get_ballHitForReset() { return ballHitForReset; }
 }

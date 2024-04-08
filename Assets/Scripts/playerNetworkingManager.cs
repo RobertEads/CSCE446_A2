@@ -2,13 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
+using System.Linq;
 
 public class playerNetworkingManager : MonoBehaviour
 {
     //Replication
     private PhotonView myView;
 
-
+    private Dictionary<PhotonView, int> allTotalScores;
     private LogisticsManagementScript logisticsManagementScript;
 
     void Start()
@@ -37,13 +38,29 @@ public class playerNetworkingManager : MonoBehaviour
     [PunRPC]
     public void cancel_gameover() { CancelInvoke("register_gameover"); }
 
+    [PunRPC]
+    public void score_request(PhotonMessageInfo info) { myView.RPC("accept_scores", info.Sender, logisticsManagementScript.get_myTotalScore()); }
+
+    [PunRPC]
+    public void accept_scores(PhotonMessageInfo info, int score) { allTotalScores[info.photonView] = score; }
+
+    [PunRPC]
+    public void designate_winner(PhotonView winner) 
+    { 
+        if (winner == myView) { logisticsManagementScript.i_won(); }
+        else { logisticsManagementScript.someone_else_won();  }
+    }
 
     private void register_gameover()
     {
-        //do stuff here - probs talk to gameManager & UI
-        Debug.Log("Game over");
-        // Send message to figure out who has the highest score
-        // send message to logistics managmer to tell the ui to display who ever had the highest score
+        allTotalScores[myView] = logisticsManagementScript.get_myTotalScore();
+        myView.RPC("score_request", RpcTarget.Others);
+
+        int maxScore = allTotalScores.Values.ToList().Min();
+        int index = allTotalScores.Values.ToList().IndexOf(maxScore);
+        PhotonView winner = allTotalScores.Keys.ToList().ElementAt(index);
+
+        myView.RPC("designate_winner", RpcTarget.All, winner);        
     }
 
 }

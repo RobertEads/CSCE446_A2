@@ -18,10 +18,6 @@ public class MovementManager : MonoBehaviour
     private float zInput;
     private float movementSpeed = 10.0f;
 
-    //Material
-    private MeshRenderer myMesh;
-    private int index = 0;
-    [SerializeField] List<Material> myMaterials;
 
     // Start is called before the first frame update
     void Start()
@@ -29,7 +25,6 @@ public class MovementManager : MonoBehaviour
         myView = GetComponent<PhotonView>();
         myBody = transform.GetChild(0).gameObject;
         myRB = myBody.GetComponent<Rigidbody>();
-        myMesh = myBody.GetComponent<MeshRenderer>();
 
         GameObject logistics = GameObject.Find("LogisticsManager");
         //myLogisticsManager = logistics.GetComponent<logisticsManager>();
