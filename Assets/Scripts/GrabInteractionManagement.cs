@@ -5,9 +5,9 @@ using UnityEngine;
 public class GrabInteractionManagement : MonoBehaviour
 {
     private LogisticsManagementScript myLogisticsManager;
+
     [SerializeField] private hand whichHandAmI;
 
-    // Start is called before the first frame update
     void Start()
     {
         GameObject logistics = GameObject.Find("LogisticManager");
