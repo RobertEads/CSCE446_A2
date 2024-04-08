@@ -39,6 +39,11 @@ MonoBehaviour:
   - DestroySpaceship
   - Fire
   - RespawnSpaceship
+  - cancel_gameover
+  - collect_finished_states
+  - accept_scores
+  - designate_winner
+  - score_request
   DisableAutoOpenWizard: 1
   ShowSettings: 0
   DevRegionSetOnce: 0

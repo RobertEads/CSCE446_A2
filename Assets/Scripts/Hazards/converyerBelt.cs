@@ -4,26 +4,34 @@ using UnityEngine;
 
 public class converyerBelt : MonoBehaviour
 {
+    private Renderer myMaterial;
+
+    [SerializeField] private List<Material> materials = new List<Material>();
+
     public bool reverseDirection = false;
     public int pushStrength = 5;
+
+    void Start()
+    {
+        myMaterial = GetComponent<Renderer>();
+        Invoke("change_direction", 5f);
+    }
 
     private void OnTriggerStay(Collider other)
     {
         if (other.gameObject.CompareTag("effectableObject"))
         {
-            if (reverseDirection == false) { other.gameObject.GetComponent<Rigidbody>().AddForce(new Vector3(pushStrength, 0f, 0f)); }
-            if (reverseDirection == true) { other.gameObject.GetComponent<Rigidbody>().AddForce(new Vector3(-pushStrength, 0f, 0f)); }
+            if (!reverseDirection) { other.gameObject.GetComponent<Rigidbody>().AddForce(new Vector3(pushStrength, 0f, 0f)); }
+            if (reverseDirection) { other.gameObject.GetComponent<Rigidbody>().AddForce(new Vector3(-pushStrength, 0f, 0f)); }
 
         }
     }
 
-    /*private void OnCollisionStay(Collision collision)
+    private void change_direction()
     {
-        if (collision.gameObject.CompareTag("effectableObject"))
-        {   
-            if(reverseDirection == false) { collision.gameObject.GetComponent<Rigidbody>().AddForce(new Vector3(pushStrength, 0f, 0f)); }
-            if (reverseDirection == true) { collision.gameObject.GetComponent<Rigidbody>().AddForce(new Vector3(-pushStrength, 0f, 0f)); }
-
-        }
-    }*/
+        reverseDirection = !reverseDirection;
+        if(reverseDirection) { myMaterial.material = materials[1]; }
+        else { myMaterial.material = materials[0]; }
+        Invoke("change_direction", 5f);
+    }
 }
