@@ -6359,6 +6359,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   userDominantHand: 1
+  leftHand: {fileID: 2039276608}
+  rightHand: {fileID: 1104867793}
 --- !u!114 &505993098
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6371,6 +6373,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 431e99193b72b284f885971679f4af8a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  logisticsManagementScript: {fileID: 0}
 --- !u!1 &514212494
 GameObject:
   m_ObjectHideFlags: 0

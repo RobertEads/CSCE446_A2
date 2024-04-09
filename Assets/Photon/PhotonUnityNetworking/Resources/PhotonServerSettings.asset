@@ -44,6 +44,7 @@ MonoBehaviour:
   - collect_finished_states
   - designate_winner
   - score_request
+  - CheckWhoWon
   DisableAutoOpenWizard: 1
   ShowSettings: 0
   DevRegionSetOnce: 0
