@@ -12,6 +12,11 @@ public class GrabInteractionManagement : MonoBehaviour
     {
         GameObject logistics = GameObject.Find("LogisticManager");
         myLogisticsManager = logistics.GetComponent<LogisticsManagementScript>();
+        run_hand_setup();
+    }
+
+    public void run_hand_setup()
+    {
         if (whichHandAmI != myLogisticsManager.get_userDominantHand()) { gameObject.SetActive(false); }
     }
 }

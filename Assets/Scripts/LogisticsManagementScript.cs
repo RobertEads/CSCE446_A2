@@ -22,6 +22,8 @@ public class LogisticsManagementScript : MonoBehaviour
     private GameObject currentBallReference;
 
     [SerializeField] private hand userDominantHand;
+    [SerializeField] private GameObject leftHand;
+    [SerializeField] private GameObject rightHand;
 
     // Start is called before the first frame update
     void Start()
@@ -30,7 +32,6 @@ public class LogisticsManagementScript : MonoBehaviour
         myScores = new Dictionary<whichHole, int>() { { whichHole.HOLE_1, 0 }, { whichHole.HOLE_2, 0 }, { whichHole.HOLE_3, 0 } };
         holeCompleted = new Dictionary<whichHole, bool>() { { whichHole.HOLE_1, false }, { whichHole.HOLE_2, false }, { whichHole.HOLE_3, false } };
     }
-
 
 
 
@@ -66,6 +67,11 @@ public class LogisticsManagementScript : MonoBehaviour
         if (currentHole == whichHole.HOLE_3) { currentBallReference.transform.position = GameObject.Find("ballSpawn_holeThree").transform.position; }
     }
 
+    private void reset_hands()
+    {
+        leftHand.SetActive(true); 
+        rightHand.SetActive(true);
+    }
 
 
 
@@ -76,7 +82,7 @@ public class LogisticsManagementScript : MonoBehaviour
     public void set_finishedWithGame(bool newValue) { finishedWithGame = newValue; }
     public void set_makeGameFinishedNetworkCall(bool newValue) { makeGameFinishedNetworkCall = newValue; }
     public void set_userLookingToTeleport(bool newValue) { userLookingToTeleport = newValue; }
-    public void set_userDominantHand(hand newValue) { userDominantHand = newValue; }
+    public void set_userDominantHand(hand newValue) { userDominantHand = newValue;  reset_hands(); }
     public void set_teleportTargetLocation(Vector3 newValue) { teleportTargetLocation = newValue; }
     public void set_targetHole(whichHole newValue) { targetHole = newValue; }
     public void set_currentBallReference(GameObject newValue) { currentBallReference = newValue; }
