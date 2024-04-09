@@ -5,8 +5,6 @@ using UnityEngine;
 public class CollisionTeleporter : MonoBehaviour
 {
     public Transform teleportTransform;
-    public LayerMask golfballLayer;
-    public string golfballTag;
 
     // Start is called before the first frame update
     void Start()
@@ -22,14 +20,10 @@ public class CollisionTeleporter : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (((1 << other.gameObject.layer) & golfballLayer) != 0)
+        if(other.gameObject.layer == LayerMask.NameToLayer("Ball"))
         {
             other.transform.position = teleportTransform.position;
         }
 
-        if (other.gameObject.CompareTag(golfballTag))
-        {
-            other.transform.position = teleportTransform.position;
-        }
     }
 }
