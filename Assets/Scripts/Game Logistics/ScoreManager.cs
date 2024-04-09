@@ -4,13 +4,19 @@ using UnityEngine;
 using TMPro;
 using Photon.Pun;
 
-public class ScoreManager : MonoBehaviour
+public class ScoreManager : MonoBehaviourPunCallbacks
 {
-    public NetworkManager networkManager;
     public List<TextMeshProUGUI> parScores = new List<TextMeshProUGUI>();
     public List<TextMeshProUGUI> playerScores = new List<TextMeshProUGUI>();
+
+    public GameObject scorePanel;
+    public GameObject winPanel;
+    public GameObject losePanel;
     
     private LogisticsManagementScript logisticsManagementScript;
+
+    private int currentScore;
+    private int lowestScore = int.MaxValue;
 
     private List<string> playerIDs = new List<string>();
 
@@ -19,7 +25,6 @@ public class ScoreManager : MonoBehaviour
     {
         GameObject logistics = GameObject.Find("LogisticManager");
         logisticsManagementScript = logistics.GetComponent<LogisticsManagementScript>();
-
     }
 
     // Update is called once per frame
@@ -29,6 +34,11 @@ public class ScoreManager : MonoBehaviour
         playerScores[1].text = logisticsManagementScript.get_score_for_specific_hole(whichHole.HOLE_2).ToString();
         playerScores[2].text = logisticsManagementScript.get_score_for_specific_hole(whichHole.HOLE_3).ToString();
         playerScores[3].text = logisticsManagementScript.get_myTotalScore().ToString();
+
+        if(logisticsManagementScript.get_finishedWithGame() )
+        {
+            DisplayWinPanel();
+        }
     }
 
     public void UpdateScore(int holeNumber, int scoreValue)
@@ -59,5 +69,38 @@ public class ScoreManager : MonoBehaviour
         }
 
         playerScores[3].text = finalScore.ToString();
+
+        currentScore = finalScore;
+    }
+
+    public void ChangeDominantToLeft()
+    {
+        logisticsManagementScript.set_userDominantHand(hand.LEFT);
+    }
+
+    public void ChangeDominantToRight()
+    {
+        logisticsManagementScript.set_userDominantHand(hand.RIGHT);
+    }
+
+    public void DisplayWinPanel()
+    {
+        winPanel.SetActive(true);
+    }
+
+    public void DisplayLossPanel()
+    {
+        losePanel.SetActive(true);
+    }
+
+    void CheckIfGameIsDone()
+    {
+
+    }
+
+    [PunRPC]
+    void CheckWhoWon()
+    {
+
     }
 }
